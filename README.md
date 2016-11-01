@@ -3,7 +3,4 @@ Project 2
 "Chutes and Ladders Game" (using the data structures learned in CPSC 131)
 
 Group members:
-
-Ada Lovelace adalovelace@csu.fullerton.edu
-
-Charles Babbage charlesbab@csu.fullerton.edu
+Xuan Do xdo0410@csu.fullerton.edu
