@@ -14,15 +14,25 @@ using namespace std;
 // TODO: implement the constructor with all your team members
 // constructor with the default value of a minimum players
 ChutesAndLaddersGame::ChutesAndLaddersGame(int nPlayers) : winner("no winner") {
-   // TODO: implement this function properly
-   throw std::logic_error("not implemented yet");
+   playerQueue = new ArrayQueue<Player>(nPlayers);
+   player1 = new Player("Player 1");
+   player2 = new Player("Player 2");
+   playerQueue->enqueue(*player1);
+   playerQueue->enqueue(*player2);
+
 }
 
 // TODO: implement the destructor
 // destructor - dequeue players from the queue
 ChutesAndLaddersGame::~ChutesAndLaddersGame() {
-   // TODO: implement this function properly
-   throw std::logic_error("not implemented yet");
+   while(!(playerQueue->empty()))
+   {
+     playerQueue->dequeue();
+   }
+   delete playerQueue;
+   delete player1;
+   delete player2;
+
 }
 
 // TO DO: implement this function properly
@@ -30,8 +40,15 @@ ChutesAndLaddersGame::~ChutesAndLaddersGame() {
 //        (i.e., the list should be the same as in the constructor).
 //        Place all players at the figurative square zero
 void ChutesAndLaddersGame::resetGame() {
-   // TODO: implement this function properly
-   throw std::logic_error("not implemented yet");
+   while(!(playerQueue->empty()))
+   {
+      playerQueue->dequeue();
+   }
+   winner = "no winner";
+   player1->setPostion(0);
+   player2->setPostion(0);
+   playerQueue->enqueue(*player1);
+   playerQueue->enqueue(*player2);
 }
 
 // TO DO: implement this function properly
@@ -45,7 +62,18 @@ void ChutesAndLaddersGame::resetGame() {
 //    - If player lands on the winning square 100, game is over
 //    - playGame returns after congratulating and printing the winner's name
 void ChutesAndLaddersGame::playGame() {
-   // TODO: implement this function properly
-   throw std::logic_error("not implemented yet");
+      while(getWinner() == "no winner")
+   {
+      Player currentPlayer = playerQueue->front();
+      currentPlayer.rollDieAndMove();
+      int newLocation = currentPlayer.getPostion();
+      newLocation = gameBoard.checkChutesLadders(newLocation);
+      currentPlayer.setPostion(newLocation);
+      if (currentPlayer.getPostion() == 100) winner = currentPlayer.getName();
+      playerQueue->dequeue();
+      playerQueue->enqueue(currentPlayer);
+	}
+   cout << getWinner() << " is the winner!" << endl;
+   return;
    
 }
