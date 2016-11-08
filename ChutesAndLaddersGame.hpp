@@ -29,8 +29,7 @@ public:
    // accessors
    // TO DO: implement the accessor to get the number Of Players
    long getNumberOfPlayers() {
-      // TODO: implement this function properly
-      throw std::logic_error("not implemented yet");
+      return MIN_NUMBER_OF_PLAYERS;
    }
    string getWinner() { return winner; }
    
@@ -46,6 +45,9 @@ private:
    
    string winner;       // the winner
    GameBoard gameBoard; // the game board
-
    // TO DO: use ArrayQueue to store the players
+   ArrayQueue<Player> *playerQueue;
+   Player *player1;
+   Player *player2;
+
 };
